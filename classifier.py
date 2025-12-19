@@ -1,6 +1,8 @@
 import tensorflow as tf
-from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_input, decode_predictions
-from tensorflow.keras.applications.resnet50 import ResNet50
+# MobileNetV2
+from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_input as preprocess_mobilenet, decode_predictions
+from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input as preprocess_resnet
+
 import numpy as np
 import cv2
 
@@ -31,24 +33,40 @@ def load_feature_extractor(model_name="MobileNetV2"):
 
 def predict_dl_class(image, model):
     """
-    Predict the class of an image using a pre-trained DL model.
-    Returns: list of (class_id, class_name, probability) tuples.
+    Predict the class of an image using a pre-trained DL model (MobileNetV2 or ResNet50).
+    Returns: list of (class_name, probability) tuples.
     """
-    # Resize to 224x224
+    import numpy as np
+    import cv2
+    from tensorflow.keras.applications.mobilenet_v2 import decode_predictions
+
+    # Redimensionner l'image à la taille attendue par le modèle
     img_resized = cv2.resize(image, (224, 224))
     
-    # Preprocess
+    # Ajouter la dimension batch pour que le modèle accepte une seule image
     img_array = np.expand_dims(img_resized, axis=0)
-    img_array = preprocess_input(img_array)
+
+    # Appliquer le prétraitement approprié selon le modèle
+    model_name = model.name.lower()
     
-    # Predict
+    if "mobilenetv2" in model_name:
+        from tensorflow.keras.applications.mobilenet_v2 import preprocess_input as preprocess_mobilenet
+        img_array = preprocess_mobilenet(img_array)
+    elif "resnet50" in model_name:
+        from tensorflow.keras.applications.resnet50 import preprocess_input as preprocess_resnet
+        img_array = preprocess_resnet(img_array)
+    else:
+        raise ValueError("Unsupported model for preprocessing")
+
+    # Effectuer la prédiction
     preds = model.predict(img_array)
-    
-    # Decode predictions (Top 3)
+
+    # Décoder les 3 classes les plus probables
     decoded_preds = decode_predictions(preds, top=3)[0]
-    
-    # Format: (class_name, probability)
     results = [(pred[1], float(pred[2])) for pred in decoded_preds]
+
+    return results
+[1], float(pred[2])) for pred in decoded_preds]
     return results
 
 # --- Custom Model Logic ---
