@@ -1,4 +1,4 @@
-# Projet de Maîtrise de la Vision par Ordinateur (CV Mastery)
+# Projet de Maîtrise de la Vision par Ordinateur
 
 Ce projet est une application web éducative et interactive construite avec **Streamlit** et **OpenCV**. Il guide l'utilisateur à travers les étapes fondamentales de la vision par ordinateur, du traitement de base des pixels jusqu'à la classification d'images par Deep Learning.
 
