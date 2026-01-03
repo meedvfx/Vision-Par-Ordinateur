@@ -1,80 +1,105 @@
-# Projet de Maîtrise de la Vision par Ordinateur
+# 👁️ vision par Ordinateur (CV Mastery)
 
-Ce projet est une application web éducative et interactive construite avec **Streamlit** et **OpenCV**. Il guide l'utilisateur à travers les étapes fondamentales de la vision par ordinateur, du traitement de base des pixels jusqu'à la classification d'images par Deep Learning.
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg?style=for-the-badge&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
 
-## Fonctionnalités
+> **Une application interactive pour explorer la Vision par Ordinateur, du traitement de pixel au Deep Learning.**
 
-L'application est divisée en quatre modules principaux :
+Ce projet est une application web éducative construite avec **Streamlit** et **OpenCV**. Il guide l'utilisateur à travers les étapes fondamentales de la vision par ordinateur de manière intuitive et visuelle.
 
-### 1. Preprocessing (Nettoyer)
-Cette étape permet de préparer l'image en réduisant le bruit et en améliorant la qualité visuelle.
--   **Conversion d'espace colorimétrique** : HSV, YUV, Grayscale.
--   **Égalisation d'histogramme (CLAHE)** : Amélioration du contraste local.
--   **Floutage (Blur)** : Gaussien (lissant) et Médian (suppression du bruit poivre et sel).
--   **Filtres de contours** : Sobel et Laplacien.
+---
 
-### 2. Segmentation (Isoler)
-Cette étape vise à séparer les objets d'intérêt de l'arrière-plan.
--   **Seuillage (Thresholding)** : Simple et Otsu (automatique).
--   **Clustering** : K-Means et GMM (Gaussian Mixture Models) pour segmenter par couleur.
--   **Watershed** : Algorithme de séparation basé sur la topographie de l'image.
+## ✨ Fonctionnalités
 
-### 3. Analyse Classique (Mesurer)
-Extraction d'informations mesurables à partir de l'image traitée.
--   **Détection de contours (Canny)** : Identification des bords des objets.
--   **Extraction de caractéristiques** : Calcul de l'aire, du périmètre, de la circularité et de l'aspect ratio des objets détectés.
--   **Histogramme de couleur** : Visualisation de la répartition des intensités RGB.
+L'application est divisée en quatre modules principaux, chacun explorant une facette de la vision par ordinateur :
 
-### 4. Deep Learning (Classifier)
-Utilisation de réseaux de neurones profonds pour classifier l'image entière.
--   **Architectures supportées** : ResNet50, MobileNetV2, InceptionV3, Vision Transformer (ViT).
--   **Modes** : 
-    -   *ImageNet* (1000 classes génériques).
-    -   *CIFAR-10* (Modèle spécialisé pour animaux/véhicules).
-    -   *Modèles personnalisés* : Possibilité de charger vos propres poids `.h5` ou `.keras`.
+### 1. 🧹 Preprocessing (Nettoyer)
+*Préparez vos images pour l'analyse en améliorant leur qualité.*
+*   🎨 **Conversion d'espace colorimétrique** : HSV, YUV, Grayscale.
+*   ⚖️ **Égalisation d'histogramme (CLAHE)** : Révélez les détails cachés.
+*   🌫️ **Floutage (Blur)** : Gaussien pour lisser, Médian pour débruiter.
+*   ✏️ **Filtres de contours** : Sobel et Laplacien pour détecter les gradients.
 
-## Structure du Projet
+### 2. 🧩 Segmentation (Isoler)
+*Séparez les objets d'intérêt du fond.*
+*   ⚫⚪ **Seuillage (Thresholding)** : Simple ou Otsu (automatique).
+*   🌈 **Clustering** : K-Means et GMM pour une segmentation basée sur la couleur.
+*   🏞️ **Watershed** : Segmentation topographique avancée.
 
-```
+### 3. 📏 Analyse Classique (Mesurer)
+*Extrayez des données quantitatives de vos images.*
+*   📐 **Détection de contours (Canny)** : Trouvez les limites précises des objets.
+*   📊 **Extraction de caractéristiques** : Aire, périmètre, circularité, ratio.
+*   📈 **Histogramme de couleur** : Analysez la répartition spectrale RGB.
+
+### 4. 🧠 Deep Learning (Classifier)
+*Exploitez la puissance de l'IA pour reconnaître le contenu.*
+*   🏗️ **Architectures SOTA** : ResNet50, MobileNetV2, InceptionV3, Vision Transformer (ViT).
+*   🎯 **Modes** : 
+    *   *ImageNet* (1000 classes).
+    *   *CIFAR-10* (Spécialisé animaux/véhicules).
+    *   *Custom* : Chargez vos propres modèles `.h5` / `.keras`.
+
+---
+
+## 📂 Structure du Projet
+
+Une organisation claire pour un développement sain :
+
+```bash
 CV/
-├── app.py              # Point d'entrée de l'application Streamlit
-├── assets/             # Fichiers statiques (CSS, images...)
-│   └── style.css       # Styles personnalisés pour l'interface
-├── models/             # Dossier pour les modèles entraînés (ex: MobileNet CIFAR-10)
-├── notebooks/          # Notebooks Jupyter pour l'entraînement et l'exploration
-├── src/                # Code source des modules
-│   ├── analysis.py     # Fonctions d'analyse (contours, features)
-│   ├── classifier.py   # Gestion des modèles de Deep Learning
-│   ├── preprocessing.py # Fonctions de traitement d'image
+├── app.py              # 🚀 Point d'entrée de l'application
+├── assets/             # 🎨 Ressources statiques (Styles, Images)
+├── models/             # 🤖 Modèles de Deep Learning
+├── notebooks/          # 📓 Expérimentations Jupyter
+├── src/                # 🧱 Code source modulaire
+│   ├── analysis.py     # Logique d'analyse
+│   ├── classifier.py   # Moteur d'inférence IA
+│   ├── preprocessing.py # Algorithmes de traitement
 │   └── segmentation.py # Algorithmes de segmentation
-└── requirements.txt    # Liste des dépendances Python
+├── requirements.txt    # 📦 Dépendances
+└── README.md           # 📖 Documentation
 ```
 
-## Installation
+---
 
-1.  **Cloner le dépôt** (si applicable) ou télécharger les fichiers.
-2.  **Créer un environnement virtuel** (recommandé) :
+## ⚙️ Installation
+
+Configurez votre environnement en quelques secondes :
+
+1.  **Cloner le projet** :
     ```bash
-    python -m venv venv
+    git clone https://github.com/votre-username/CV.git
+    cd CV
+    ```
+
+2.  **Créer un environnement virtuel** (Recommandé) :
+    ```bash
     # Windows
+    python -m venv venv
     venv\Scripts\activate
+    
     # Mac/Linux
     source venv/bin/activate
     ```
+
 3.  **Installer les dépendances** :
     ```bash
     pip install -r requirements.txt
     ```
 
-## Utilisation
+---
 
-Pour lancer l'application, exécutez la commande suivante depuis la racine du projet :
+## 🚀 Utilisation
+
+Lancez l'interface web avec une simple commande :
 
 ```bash
 streamlit run app.py
 ```
 
-L'application s'ouvrira automatiquement dans votre navigateur par défaut.
+L'application s'ouvrira automatiquement dans votre navigateur ! 🎉
 
 ---
 
@@ -90,4 +115,3 @@ Ce projet a été développé par **Mohamed ZAHZOUH**.
 <center>
   <sub>Réalisé avec ❤️ et Python.</sub>
 </center>
-
